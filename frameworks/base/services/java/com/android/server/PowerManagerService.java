@@ -1866,6 +1866,8 @@ public class PowerManagerService extends IPowerManager.Stub
     {
         synchronized (mLocks) {
             int err;
+	    if ( newState == 0x0 )
+		mLcdLight.setBrightness(0);
 
             if (mSpew) {
                 Slog.d(TAG, "setPowerState: mPowerState=0x" + Integer.toHexString(mPowerState)
