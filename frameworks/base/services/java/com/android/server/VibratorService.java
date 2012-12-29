@@ -495,10 +495,11 @@ public class VibratorService extends IVibratorService.Stub
                 while (!mDone) {
                     // add off-time duration to any accumulated on-time duration
                     if (index < len) {
-                        duration += pattern[index++];
+                        duration = pattern[index++];
                     }
 
                     // sleep until it is time to start the vibrator
+		    VibratorService.this.doVibratorOn(0);
                     delay(duration);
                     if (mDone) {
                         break;
@@ -510,6 +511,7 @@ public class VibratorService extends IVibratorService.Stub
                         duration = pattern[index++];
                         if (duration > 0) {
                             VibratorService.this.doVibratorOn(duration);
+			    delay(duration);
                         }
                     } else {
                         if (repeat < 0) {
